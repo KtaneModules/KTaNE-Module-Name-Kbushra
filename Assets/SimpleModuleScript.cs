@@ -30,7 +30,7 @@ public class SimpleModuleScript : MonoBehaviour {
 	int randCount;
 	int randHTML;
 	int randCol;
-	string[] htmlList = new string[33]
+	string[] htmlList = new string[32]
 	{"<p>1", "<tr>3", "<tr>4<td>1", "<tr>2<th>1", "<ul>1<li>3", "<ul>2<li>1<strong>1", "<h3>3", "<p>2", "<ul>3<li>3", "<p>3", "<h3>1", 
 	"<ul>1<li>2", "<p>4", "<tr>1<th>1", "<tr>4<th>1", "<h3>2", "<p>6", "<ul>1<li>1", "<ul>1<li>3<ol>1", "<h4>1", "<tr>8<th>1",
 	"<ul>1<li>2<ul>1", "<h3>5", "<h3>4", "<ul>3<li>1", "<ul>2<li>2<em>1", "<tr>2<td>2", "<ol>1<li>1", "<img>1", "<ul>3<li>5<ul>1", "<i>2", "<tr>9"};
@@ -156,7 +156,7 @@ public class SimpleModuleScript : MonoBehaviour {
 	void Start()
 	{
 		randCount = Rnd.Range (2, 11);
-		randHTML = Rnd.Range (0, 32);
+		randHTML = Rnd.Range (0, 31);
 		randCol = Rnd.Range (0, 3);
 	}
 
@@ -1179,7 +1179,7 @@ public class SimpleModuleScript : MonoBehaviour {
 		}
 		pressCount = 0;
 		randCount = Rnd.Range (2, 11);
-		randHTML = Rnd.Range (0, 32);
+		randHTML = Rnd.Range (0, 31);
 		randCol = Rnd.Range (0, 3);
 	}
 
