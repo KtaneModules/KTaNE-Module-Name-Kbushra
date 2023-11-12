@@ -33,7 +33,7 @@ public class SimpleModuleScript : MonoBehaviour {
 	string[] htmlList = new string[32]
 	{"<p>1", "<tr>3", "<tr>4<td>1", "<tr>2<th>1", "<ul>1<li>3", "<ul>2<li>1<strong>1", "<h3>3", "<p>2", "<ul>3<li>3", "<p>3", "<h3>1", 
 	"<ul>1<li>2", "<p>4", "<tr>1<th>1", "<tr>4<th>1", "<h3>2", "<p>6", "<ul>1<li>1", "<ul>1<li>3<ol>1", "<h4>1", "<tr>8<th>1",
-	"<ul>1<li>2<ul>1", "<h3>5", "<h3>4", "<ul>3<li>1", "<ul>2<li>2<em>1", "<tr>2<td>2", "<ol>1<li>1", "<img>1", "<ul>3<li>5<ul>1", "<i>2", "<tr>9"};
+	"<ul>1<li>2<ul>1", "<h3>5", "<h3>4", "<ul>3<li>1", "<ul>2<li>2<em>1", "<tr>2<td>1", "<ol>1<li>1", "<img>1", "<ul>3<li>5<ul>1", "<i>2", "<tr>9"};
 	public Material[] screenCol;
 	bool _isSolved = false;
 	bool incorrect = false;
@@ -85,11 +85,11 @@ public class SimpleModuleScript : MonoBehaviour {
 	//Hertz vars
 	private static readonly int[,] hertzTable1 = new int[5, 5] 
 	{
-		{857, 938, 859, 0, 0},
-		{490, 607, 206, 150,0},
+		{857, 938, 859, 200, 200},
+		{490, 607, 206, 150,200},
 		{552, 569, 466, 282, 948},
-		{0, 485, 262, 308, 345},
-		{0, 0, 398, 423, 332}
+		{200, 485, 262, 308, 345},
+		{200, 200, 398, 423, 332}
 	};
 	private static readonly int[,] hertzTable2 = new int[5, 5] 
 	{
@@ -155,16 +155,16 @@ public class SimpleModuleScript : MonoBehaviour {
 
 	void Start()
 	{
-		randCount = Rnd.Range (2, 11);
-		randHTML = Rnd.Range (0, 31);
-		randCol = Rnd.Range (0, 3);
+		randCount = Rnd.Range (2, 12);
+		randHTML = Rnd.Range (0, 32);
+		randCol = Rnd.Range (0, 4);
 	}
 
 	void FixedUpdate ()
 	{
 		if (simonException == true && input == output && input.ToString().ToCharArray().Length != 8) 
 		{
-			randCol = Rnd.Range (0, 3);
+			randCol = Rnd.Range (0, 4);
 			Material material = screenCol [randCol];
 			Screen.GetComponent<Renderer> ().material = material;
 			simonException = false;
@@ -214,6 +214,7 @@ public class SimpleModuleScript : MonoBehaviour {
 						Displays [0].gameObject.SetActive (true);
 						Displays [0].text = htmlList [randHTML];
 						ding.Play ();
+						Debug.LogFormat ("[Module Name #{0}] The amount of times pressed is {1}", ModuleId, randCount);
 					} 
 					else if (pressCount == randCount + 1)
 					{
@@ -379,56 +380,66 @@ public class SimpleModuleScript : MonoBehaviour {
 		{
 			if (material == screenCol[0])
 			{
+				Debug.LogFormat ("[Module Name #{0}] Module chosen is Blank Slate and the section used is NOTHING INITIALLY", ModuleId);
 				blankslateException = true;
-				Debug.LogFormat ("[Module Name #{0}] Module chosen is Blank Slate and invalid numbers are {1}, {2}, {3} and {4}", ModuleId, (randCount + info.GetPortPlateCount ()) % 10, (randCount + info.GetBatteryCount ()) % 10, (randCount + info.GetSolvedModuleNames ().Count) % 10, (randCount + info.GetBatteryHolderCount ()) % 10);
+				Debug.LogFormat ("[Module Name #{0}] Invalid numbers are {1}, {2}, {3} and {4}", ModuleId, (randCount + info.GetPortPlateCount ()) % 10, (randCount + info.GetBatteryCount ()) % 10, (randCount + info.GetSolvedModuleNames ().Count) % 10, (randCount + info.GetBatteryHolderCount ()) % 10);
 			}
 			if(material == screenCol[1])
 			{
+				Debug.LogFormat ("[Module Name #{0}] Module chosen is Blank Slate and the section used is HIGHPITCH SOUND", ModuleId);
 				output = highpitchTable [info.GetSerialNumberNumbers ().ToArray () [1] % 5, randCount % 5];
 				output = output + (randCount * 7);
-				Debug.LogFormat ("[Module Name #{0}] Module chosen is Blank Slate and the output is {1}", ModuleId, output);
+				Debug.LogFormat ("[Module Name #{0}] The output is {1}", ModuleId, output);
 			}
 			if (material == screenCol[2]) 
 			{
+				Debug.LogFormat ("[Module Name #{0}] Module chosen is Blank Slate and the section used is HINGE FALLS", ModuleId);
 				if((info.GetPortCount() % 8 + 1 > info.GetBatteryCount() % 8 + 1 && info.GetPortCount() % 8 + 1 < info.GetOnIndicators().Count() % 8 + 1) || (info.GetPortCount() % 8 + 1 < info.GetBatteryCount() % 8 + 1 && info.GetPortCount() % 8 + 1 > info.GetOnIndicators().Count() % 8 + 1))
 				{
 					output = (hingefallsTable [info.GetPortCount () % 8, hingefallsTable [info.GetPortCount () % 8, randCount % 8] % 8] * 100) + (hingefallsTable [info.GetBatteryCount () % 8, hingefallsTable [info.GetPortCount () % 8, randCount % 8] % 8] * 10) + hingefallsTable [info.GetOnIndicators().Count() % 8, hingefallsTable [info.GetPortCount () % 8, randCount % 8] % 8];
+					Debug.LogFormat ("[Module Name #{0}] Port is middle", ModuleId);
 				}
 				else if((info.GetBatteryCount() % 8 + 1 > info.GetPortCount() % 8 + 1 && info.GetBatteryCount() % 8 + 1 < info.GetOnIndicators().Count() % 8 + 1) || (info.GetBatteryCount() % 8 + 1 < info.GetPortCount() % 8 + 1 && info.GetBatteryCount() % 8 + 1 > info.GetOnIndicators().Count() % 8 + 1))
 				{
 					output = (hingefallsTable [info.GetPortCount () % 8, hingefallsTable [info.GetBatteryCount () % 8, randCount % 8] % 8] * 100) + (hingefallsTable [info.GetBatteryCount () % 8, hingefallsTable [info.GetBatteryCount () % 8, randCount % 8] % 8] * 10) + hingefallsTable [info.GetOnIndicators().Count() % 8, hingefallsTable [info.GetBatteryCount () % 8, randCount % 8] % 8];
+					Debug.LogFormat ("[Module Name #{0}] Battery is middle", ModuleId);
 				}
 				else if((info.GetOnIndicators().Count() % 8 + 1 > info.GetPortCount() % 8 + 1 && info.GetOnIndicators().Count() % 8 + 1 < info.GetBatteryCount() % 8 + 1) || (info.GetOnIndicators().Count() % 8 + 1 < info.GetPortCount() % 8 + 1 && info.GetOnIndicators().Count() % 8 + 1 > info.GetBatteryCount() % 8 + 1))
 				{
 					output = (hingefallsTable [info.GetPortCount () % 8, hingefallsTable [info.GetOnIndicators().Count() % 8, randCount % 8] % 8] * 100) + (hingefallsTable [info.GetBatteryCount () % 8, hingefallsTable [info.GetOnIndicators().Count() % 8, randCount % 8] % 8] * 10) + hingefallsTable [info.GetOnIndicators().Count() % 8, hingefallsTable [info.GetOnIndicators().Count() % 8, randCount % 8] % 8];
+					Debug.LogFormat ("[Module Name #{0}] Ind is middle", ModuleId);
 				}
 				else if(info.GetPortCount() % 8 + 1 <= info.GetBatteryCount() % 8 + 1 && info.GetPortCount() % 8 + 1 <= info.GetOnIndicators().Count() % 8 + 1)
 				{
 					output = (hingefallsTable [info.GetPortCount () % 8, hingefallsTable [info.GetPortCount () % 8, randCount % 8] % 8] * 100) + (hingefallsTable [info.GetBatteryCount () % 8, hingefallsTable [info.GetPortCount () % 8, randCount % 8] % 8] * 10) + hingefallsTable [info.GetOnIndicators().Count() % 8, hingefallsTable [info.GetPortCount (), randCount % 8] % 8];
+					Debug.LogFormat ("[Module Name #{0}] Port is top (NO MIDDLE)", ModuleId);
 				}
 				else if(info.GetBatteryCount() % 8 + 1 <= info.GetPortCount() % 8 + 1 && info.GetBatteryCount() % 8 + 1 <= info.GetOnIndicators().Count() % 8 + 1)
 				{
 					output = (hingefallsTable [info.GetPortCount () % 8, hingefallsTable [info.GetBatteryCount () % 8, randCount % 8] % 8] * 100) + (hingefallsTable [info.GetBatteryCount () % 8, hingefallsTable [info.GetBatteryCount () % 8, randCount % 8] % 8] * 10) + hingefallsTable [info.GetOnIndicators().Count() % 8, hingefallsTable [info.GetBatteryCount () % 8, randCount % 8] % 8];
+					Debug.LogFormat ("[Module Name #{0}] Battery is top (NO MIDDLE)", ModuleId);
 				}
 				else if(info.GetOnIndicators().Count() % 8 + 1 <= info.GetPortCount() % 8 + 1 && info.GetOnIndicators().Count() % 8 + 1 <= info.GetBatteryCount() % 8 + 1)
 				{
 					output = (hingefallsTable [info.GetPortCount () % 8, hingefallsTable [info.GetOnIndicators().Count() % 8, randCount % 8] % 8] * 100) + (hingefallsTable [info.GetBatteryCount () % 8, hingefallsTable [info.GetOnIndicators().Count() % 8, randCount % 8] % 8] * 10) + hingefallsTable [info.GetOnIndicators().Count() % 8, hingefallsTable [info.GetOnIndicators().Count() % 8, randCount % 8] % 8];
+					Debug.LogFormat ("[Module Name #{0}] Ind is top (NO MIDDLE)", ModuleId);
 				}
-				Debug.LogFormat ("[Module Name #{0}] Module chosen is Blank Slate and the output is {1}", ModuleId, output);
+				Debug.LogFormat ("[Module Name #{0}] The output is {1}", ModuleId, output);
 			}
 			if(material == screenCol[3])
 			{
+				Debug.LogFormat ("[Module Name #{0}] Module chosen is Blank Slate and the section used is TAPCODE", ModuleId);
 				for (int i = 0; i < 5; i++) 
 				{
 					for (int j = 0; j < 3; j++) 
 					{
 						for (int k = 0; k < info.GetSerialNumberLetters().ToArray().Length; k++) 
 						{
-							if (tapcodeTable [randCount % 7 + 1, i].ToCharArray () [j] == info.GetSerialNumberLetters ().ToArray () [k].ToString().ToLower().ToCharArray()[0]) 
+							if (tapcodeTable [randCount % 7, i].ToCharArray () [j] == info.GetSerialNumberLetters ().ToArray () [k].ToString().ToLower().ToCharArray()[0]) 
 							{
 								output = (Encode (tapcodeTable [randCount % 7, i])[0] * 100000) + (Encode (tapcodeTable [randCount % 7, i])[1] * 10000) + (Encode (tapcodeTable [randCount % 7, i])[2] * 1000) + (Encode (tapcodeTable [randCount % 7, i])[3] * 100) + (Encode (tapcodeTable [randCount % 7, i])[4] * 10) + Encode (tapcodeTable [randCount % 7, i])[5];
 								tapsFound = true;
-								Debug.LogFormat ("[Module Name #{0}] Module chosen is Blank Slate and the output is {1}", ModuleId, output);
+								Debug.LogFormat ("[Module Name #{0}] The output is {1}", ModuleId, output);
 								break;
 							}
 						}
@@ -446,7 +457,7 @@ public class SimpleModuleScript : MonoBehaviour {
 				{
 					output = (Encode (tapcodeTable [randCount % 7, 4])[0] * 100000) + (Encode (tapcodeTable [randCount % 7, 4])[1] * 10000) + (Encode (tapcodeTable [randCount % 7, 4])[2] * 1000) + (Encode (tapcodeTable [randCount % 7, 4])[3] * 100) + (Encode (tapcodeTable [randCount % 7, 4])[4] * 10) + Encode (tapcodeTable [randCount % 7, 4])[5];
 					tapsFound = true;
-					Debug.LogFormat ("[Module Name #{0}] Module chosen is Blank Slate and the output is {1}", ModuleId, output);
+					Debug.LogFormat ("[Module Name #{0}] The output is {1}", ModuleId, output);
 				}
 			}
 		}
@@ -514,6 +525,7 @@ public class SimpleModuleScript : MonoBehaviour {
 			{
 				posy = posy + 5;
 			}
+			Debug.LogFormat ("[Module Name #{0}] Module chosen is Hertz and the movement in X axis is {1}, the movement in Y axis is {2}", ModuleId, posx, posy);
 
 			modify1 = hertzTable1 [2 - posy, 2 + posx];
 			modify2 = hertzTable2 [2 - posy, 2 + posx];
@@ -521,7 +533,7 @@ public class SimpleModuleScript : MonoBehaviour {
 			output = (modify1 / modify2) % 64;
 			output = (long)Math.Truncate (Convert.ToDouble(output));
 			output = long.Parse (Convert.ToString (output, 2));
-			Debug.LogFormat ("[Module Name #{0}] Module chosen is Hertz and the output is {1}", ModuleId, output);
+			Debug.LogFormat ("[Module Name #{0}] The output is {1}", ModuleId, output);
 		}
 
 		if(htmlList[randHTML] == "<ul>1<li>2" || htmlList[randHTML] == "<ul>1<li>3" || htmlList[randHTML] == "<tr>3" || htmlList[randHTML] == "<p>2" || htmlList[randHTML] == "<p>3" || htmlList[randHTML] == "<h3>5" || htmlList[randHTML] == "<tr>2<td>1" || htmlList[randHTML] == "<tr>4<td>1" || htmlList[randHTML] == "<tr>9")
@@ -625,39 +637,46 @@ public class SimpleModuleScript : MonoBehaviour {
 			else
 			{
 				requiredCol = simontableB [int.Parse (curstring.ToCharArray () [0].ToString ()), int.Parse (curstring.ToCharArray () [1].ToString ())];
+				Debug.LogFormat ("[Module Name #{0}] Module chosen is Simon's statement and the boolean evaluated false", ModuleId);
+			}
+
+			if(requiredCol == simontableA [int.Parse (curstring.ToCharArray () [0].ToString ()), int.Parse (curstring.ToCharArray () [1].ToString ())])
+			{
+				Debug.LogFormat ("[Module Name #{0}] Module chosen is Simon's statement and the boolean evaluated true", ModuleId);
 			}
 
 			if (requiredCol == 3) 
 			{
 				requiredCol = 2;
 			}
-			if (requiredCol == 2) 
+			else if (requiredCol == 2) 
 			{
 				requiredCol = 0;
 			}
-			if (requiredCol == 1) 
+			else if (requiredCol == 1) 
 			{
 				requiredCol = 3;
 			}
-			if (requiredCol == 0) 
+			else if (requiredCol == 0) 
 			{
 				requiredCol = 1;
 			}
 
 			output = output * 100 + curNum;
 			curNum = (int)output;
-			Debug.LogFormat ("[Module Name #{0}] Module chosen is Simon's statement and the output for now is {1}, and required colour being {2}", ModuleId, output, requiredCol + 1);
+			Debug.LogFormat ("[Module Name #{0}] The output for now is {1}, and required colour being {2}", ModuleId, output, requiredCol + 1);
 			simonException = true;
 		}
 
 		if (htmlList [randHTML] == "<ul>2<li>2<em>1" || htmlList [randHTML] == "<h3>2" || htmlList [randHTML] == "<p>3" || htmlList [randHTML] == "<p>4" || htmlList [randHTML] == "<p>6" || htmlList [randHTML] == "<ul>3<li>3") 
 		{
 			letters [0] = info.GetSerialNumberLetters ().ToArray () [0];
-			if (material = screenCol [0]) {letters [1] = 'B'; letters [2] = 'L';}
-			if (material = screenCol [1]) {letters [1] = 'R'; letters [2] = 'E';}
-			if (material = screenCol [2]) {letters [1] = 'Y'; letters [2] = 'E';}
-			if (material = screenCol [3]) {letters [1] = 'G'; letters [2] = 'R';}
-			for (int i = 0; i < randCount % 4 + 2; i++) 
+			if (material == screenCol [0]) {letters [1] = 'B'; letters [2] = 'L';}
+			if (material == screenCol [1]) {letters [1] = 'R'; letters [2] = 'E';}
+			if (material == screenCol [2]) {letters [1] = 'Y'; letters [2] = 'E';}
+			if (material == screenCol [3]) {letters [1] = 'G'; letters [2] = 'R';}
+			Debug.LogFormat ("[Module Name #{0}] The letters are {0}, {1} and {2}", letters [0], letters [1], letters [2]);
+			for (int i = 0; i < (randCount % 4 + 2); i++) 
 			{
 				if (i == 0 && (letters[0] == 'A' || letters[0] == 'E' || letters[0] == 'I' || letters[0] == 'O' || letters[0] == 'U')) 
 				{
@@ -718,7 +737,7 @@ public class SimpleModuleScript : MonoBehaviour {
 				}
 			}
 
-			for (int i = 0; i < randCount % 4 + 2; i++) 
+			for (int i = 0; i < (randCount % 4 + 2); i++) 
 			{
 				if (i == 0)
 				{
@@ -780,7 +799,7 @@ public class SimpleModuleScript : MonoBehaviour {
 				}
 			}
 
-			for (int i = 0; i < randCount % 4 + 2; i++) 
+			for (int i = 0; i < (randCount % 4 + 2); i++) 
 			{
 				if (i == 0 && (letters[1] == 'A' || letters[1] == 'E' || letters[1] == 'I' || letters[1] == 'O' || letters[1] == 'U')) 
 				{
@@ -850,7 +869,7 @@ public class SimpleModuleScript : MonoBehaviour {
 				}
 			}
 
-			for (int i = 0; i < randCount % 4 + 2; i++) 
+			for (int i = 0; i < (randCount % 4 + 2); i++) 
 			{
 				if (i == 0 && (letters[2] == 'A' || letters[2] == 'E' || letters[2] == 'I' || letters[2] == 'O' || letters[2] == 'U')) 
 				{
@@ -907,7 +926,8 @@ public class SimpleModuleScript : MonoBehaviour {
 			arraystatements [3] = leftstatements;
 			Array.Sort (arraystatements);
 			output = (arraystatements [3] * 1000) + (arraystatements [0] * 100) + (arraystatements [1] * 10) + arraystatements [2];
-			Debug.LogFormat ("[Module Name #{0}] Module chosen is Not green arrows and the output is {1}", ModuleId, output);
+			Debug.LogFormat ("[Module Name #{0}] Module chosen is Not green arrows and statement amounts (in the order up,right,down and left) are {1}, {2}, {3} and {4}", ModuleId, upstatements, rightstatements, downstatements, leftstatements);
+			Debug.LogFormat ("[Module Name #{0}] Output is {1}", ModuleId, output);
 		}
 	}
 
@@ -1178,9 +1198,10 @@ public class SimpleModuleScript : MonoBehaviour {
 			button.gameObject.transform.localPosition = new Vector3 (button.gameObject.transform.localPosition.x, button.gameObject.transform.localPosition.y - 0.02f, button.gameObject.transform.localPosition.z);
 		}
 		pressCount = 0;
-		randCount = Rnd.Range (2, 11);
-		randHTML = Rnd.Range (0, 31);
-		randCol = Rnd.Range (0, 3);
+		randCount = Rnd.Range (2, 12);
+		randHTML = Rnd.Range (0, 32);
+		randCol = Rnd.Range (0, 4);
+		randCol = 3;
 	}
 
 	int[] Encode(string s)

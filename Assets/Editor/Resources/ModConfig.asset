@@ -18,4 +18,4 @@ MonoBehaviour:
     from other modules
   version: 1.0
   outputFolder: build
-  previewImage: {fileID: 0}
+  previewImage: {fileID: 2800000, guid: 04147a9b83fa8e249a7397ce48397005, type: 3}

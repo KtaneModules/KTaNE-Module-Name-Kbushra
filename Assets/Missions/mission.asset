@@ -14,7 +14,7 @@ MonoBehaviour:
   DisplayName: Blank HTML
   Description: '*Insert description here*'
   GeneratorSetting:
-    TimeLimit: 450
+    TimeLimit: 300
     NumStrikes: 1
     TimeBeforeNeedyActivation: 90
     FrontFaceOnly: 0
