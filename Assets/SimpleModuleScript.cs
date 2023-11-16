@@ -668,14 +668,14 @@ public class SimpleModuleScript : MonoBehaviour {
 			simonException = true;
 		}
 
-		if (htmlList [randHTML] == "<ul>2<li>2<em>1" || htmlList [randHTML] == "<h3>2" || htmlList [randHTML] == "<p>3" || htmlList [randHTML] == "<p>4" || htmlList [randHTML] == "<p>6" || htmlList [randHTML] == "<ul>3<li>3") 
+		if (htmlList [randHTML] == "<ul>2<li>2<em>1" || htmlList [randHTML] == "<h3>2" || htmlList [randHTML] == "<p>4" || htmlList [randHTML] == "<p>6" || htmlList [randHTML] == "<ul>3<li>3") 
 		{
 			letters [0] = info.GetSerialNumberLetters ().ToArray () [0];
 			if (material == screenCol [0]) {letters [1] = 'B'; letters [2] = 'L';}
 			if (material == screenCol [1]) {letters [1] = 'R'; letters [2] = 'E';}
 			if (material == screenCol [2]) {letters [1] = 'Y'; letters [2] = 'E';}
 			if (material == screenCol [3]) {letters [1] = 'G'; letters [2] = 'R';}
-			Debug.LogFormat ("[Module Name #{0}] The letters are {0}, {1} and {2}", letters [0], letters [1], letters [2]);
+			Debug.LogFormat ("[Module Name #{0}] The letters are {0}, {1} and {2}, with amount of statements checked being {3}", letters [0], letters [1], letters [2], randCount % 4 + 2);
 			for (int i = 0; i < (randCount % 4 + 2); i++) 
 			{
 				if (i == 0 && (letters[0] == 'A' || letters[0] == 'E' || letters[0] == 'I' || letters[0] == 'O' || letters[0] == 'U')) 
@@ -824,23 +824,38 @@ public class SimpleModuleScript : MonoBehaviour {
 							total = total + ((check [0] - 1) * 5) + check [1] + 1;
 						}
 					}
-					List<int> totaldigits = new List<int>();
-					for (int j = 0; j < total.ToString ().ToCharArray ().Length; j++) 
+					List<double> totaldigits = new List<double>();
+					for (int j = 0; j < total.ToString ().Length; j++) 
 					{
-						totaldigits.Add(total.ToString ().ToCharArray () [j]);
+						totaldigits.Add(char.GetNumericValue(total.ToString ().ToCharArray () [j]));
 					}
 					if (totaldigits.Count == 1) 
 					{
-						if (total % totaldigits [0] == 0) 
+						print (total);
+						print (totaldigits [0]);
+						if (total % (int)totaldigits [0] == 0) 
 						{
 							downstatements++;
 						}
 					}
 					else
 					{
-						if (total % ( totaldigits [0] + totaldigits [1]) == 0) 
+						print (total);
+						print (totaldigits [0]);
+						print (totaldigits [1]);
+						if ((totaldigits [0] + totaldigits [1]).ToString ().Length != 2)
 						{
-							downstatements++;
+							if (total % ((int)totaldigits [0] + (int)totaldigits [1]) == 0) 
+							{
+								downstatements++;
+							}
+						}
+						else
+						{
+							if (total % ((int)char.GetNumericValue((totaldigits [0] + totaldigits [1]).ToString().ToCharArray()[0]) + (int)char.GetNumericValue((totaldigits [0] + totaldigits [1]).ToString().ToCharArray()[1])) == 0) 
+							{
+								downstatements++;
+							}
 						}
 					}
 				}
@@ -1188,6 +1203,10 @@ public class SimpleModuleScript : MonoBehaviour {
 		indFound = false;
 		portFound = false;
 		requiredCol = 0;
+		upstatements = 0;
+		rightstatements = 0;
+		downstatements = 0;
+		leftstatements = 0;
 		input = 0;
 		output = 0;
 		Displays [1].text = "0";
