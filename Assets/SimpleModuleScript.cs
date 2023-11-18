@@ -137,6 +137,9 @@ public class SimpleModuleScript : MonoBehaviour {
 	int leftstatements = 0;
 	int[] arraystatements = new int[4];
 
+	private bool colourblindSupportOn;
+	public TextMesh colourblindText;
+
 	void Awake()
 	{
 		ModuleId = ModuleIdCounter++;
@@ -162,6 +165,30 @@ public class SimpleModuleScript : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
+		if (colourblindSupportOn == true && pressCount == randCount + 1)
+		{
+			if (randCol == 0)
+			{
+				colourblindText.text = "Blue";
+			}
+			if (randCol == 1)
+			{
+				colourblindText.text = "Red";
+			}
+			if (randCol == 2)
+			{
+				colourblindText.text = "Yellow";
+			}
+			if (randCol == 3)
+			{
+				colourblindText.text = "Green";
+			}
+		}
+		else
+		{
+			colourblindText.text = "";
+		}
+
 		if (simonException == true && input == output && input.ToString().ToCharArray().Length != 8) 
 		{
 			randCol = Rnd.Range (0, 4);
@@ -1220,7 +1247,6 @@ public class SimpleModuleScript : MonoBehaviour {
 		randCount = Rnd.Range (2, 12);
 		randHTML = Rnd.Range (0, 32);
 		randCol = Rnd.Range (0, 4);
-		randCol = 3;
 	}
 
 	int[] Encode(string s)
@@ -1345,19 +1371,84 @@ public class SimpleModuleScript : MonoBehaviour {
 	}
 
 	#pragma warning disable 414
-	private string TwitchHelpMessage = "!{0} press [Presses the module if active], !{0} pressButton # [Presses the specified button if active].";
+	private string TwitchHelpMessage = "!{0} colo(u)rblind [toggles colourblind support], !{0} press [Presses the module if active], !{0} pressbutton # [Presses the specified button if active (10 is display)].";
 	#pragma warning restore 414
 	IEnumerator ProcessTwitchCommand(string command)
 	{
-		var pressMatch = Regex.Match(command, @"^", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-		var buttonpressMatch = Regex.Match(command, @"^", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+		int num;
+		string[] parameters = command.Split(' ');
+		parameters [0] = parameters [0].ToLower ();
 
-		if (pressMatch.Success) 
+		if (parameters [0] == "colourblind" || parameters [0] == "colorblind") 
 		{
-			yield break;
+			if (parameters.Length > 1)
+			{
+				yield return "sendtochaterror Too many parameters!";
+				yield break;
+			}
+			else 
+			{
+				yield return null;
+				colourblindSupportOn = !colourblindSupportOn;
+				yield break;
+			}
 		}
-		else if (buttonpressMatch.Success)
+		else if (parameters [0] == "press") 
 		{
+			if (parameters.Length > 1)
+			{
+				yield return "sendtochaterror Too many parameters!";
+				yield break;
+			}
+			else if(!moduleSelect[0].gameObject.activeInHierarchy)
+			{
+				yield return "sendtochaterror Module press not active!";
+				yield break;
+			}
+			else 
+			{
+				yield return null;
+				moduleSelect [0].OnInteract ();
+				yield break;
+			}
+		}
+		else if (parameters [0] == "pressbutton") 
+		{
+			if (parameters.Length < 2)
+			{
+				yield return "sendtochaterror Not enough parameters!";
+				yield break;
+			}
+			if (parameters.Length > 2)
+			{
+				yield return "sendtochaterror Too many parameters!";
+				yield break;
+			}
+			else if(pressCount != randCount + 1)
+			{
+				yield return "sendtochaterror Buttons not active!";
+				yield break;
+			}
+			else if(int.TryParse(parameters[1], out num) == false)
+			{
+				yield return "sendtochaterror Second parameter is not a number!";
+				yield break;
+			}
+			else if(int.Parse(parameters[1]) < 0 || int.Parse(parameters[1]) > 10)
+			{
+				yield return "sendtochaterror Second parameter is not in range!";
+				yield break;
+			}
+			else
+			{
+				yield return null;
+				selectables [int.Parse (parameters [1])].OnInteract ();
+				yield break;
+			}
+		}
+		else
+		{
+			yield return "sendtochaterror That command does not exist!";
 			yield break;
 		}
 	}
