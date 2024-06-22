@@ -8,6 +8,12 @@
     <link rel="stylesheet" type="text/css" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script src="js/ktane-utils.js"></script>
+    <style>
+        table { margin: 0 auto; }
+        .page-footer::before { content: 'Page '; }
+        .example { width: 80%; }
+        .dark .example { filter: invert(90%); }
+    </style>
 </head>
 <body>
     <div class="section">
@@ -17,52 +23,55 @@
                 <span class="page-header-section-title">Module Name</span>
             </div>
             <div class="page-content">
-                <img src="img/Component/Module Name.svg" class="diagram">
+                <img src="img/Component/Component.svg" class="diagram">
                 <h2>On the Subject of Module Name</h2>
-                <p class="flavour-text">Your flavor text should go here.</p>
+                <p class="comment">Your flavor text should go here.</p>
 
-                <p><a href="https://ktane.timwi.de/HTML/The%20Octadecayotton.html">Here are templates for commonly used manual features. Make sure to always use closing tags (the ones with a <code>/</code> in them).</a></p>
+                <p>
+                    <a href="The Octadecayotton.html">Here are templates for commonly used manual features.
+                    Make sure to always use closing tags (the ones with a <code>/</code> in them).</a>
+                </p>
 
-                <h3><a href="https://ktane.timwi.de/HTML/Hertz.html">Bullet Points (Unordered Lists)</a></h3>
+                <h3><a href="Hertz.html">Bullet Points (Unordered Lists)</a></h3>
                 <ul>
-                    <li><a href="https://ktane.timwi.de/HTML/Hertz.html">Bullet points should use the <code>&lt;ul&gt;&lt;/ul&gt;</code>(group of points) and <code>&lt;li&gt;&lt;/li&gt;</code>(single point) tags.</a></li>
+                    <li><a href="Hertz.html">Bullet points should use the <code>&lt;ul&gt;&lt;/ul&gt;</code>(groups of bullet points) and <code>&lt;li&gt;&lt;/li&gt;</code>(single bullet point) tags.</a></li>
                     <li>
-                        <a href="https://ktane.timwi.de/HTML/Simon%27s%20Statement.html">You can even have nested bullet points:</a>
+                        <a href="Simon's Statement.html">You can even have nested bullet points:</a>
                         <ul>
-                            <li><a href="https://ktane.timwi.de/HTML/Blank%20Slate.html">Indented</a></li>
-                            <li><a href="https://ktane.timwi.de/HTML/Blank%20Slate.html">Bullet Points</a></li>
+                            <li><a href="Blank Slate.html">Indented</a></li>
+                            <li><a href="Blank Slate.html">Bullet Points (these are made from having uls nested into another ul)</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="https://ktane.timwi.de/HTML/Simon%27s%20Statement.html">Or numbered lists:</a>
+                        <a href="Simon's Statement.html">Or numbered lists:</a>
                         <ol>
-                            <li><a href="https://ktane.timwi.de/HTML/The%20Octadecayotton.html">Number</a></li>
-                            <li><a href="https://ktane.timwi.de/HTML/The%20Octadecayotton.html">Lists</a></li>
+                            <li><a href="The Octadecayotton.html">Number</a></li>
+                            <li><a href="The Octadecayotton.html">Lists</a></li>
                         </ol>
                     </li>
                 </ul>
 
-                <h3><a href="https://ktane.timwi.de/HTML/Not%20Green%20Arrows.html">Numbered Lists (Ordered Lists)</a></h3>
+                <h3><a href="Not Green Arrows.html">Numbered Lists (Ordered Lists)</a></h3>
                 <ol>
-                    <li><a href="https://ktane.timwi.de/HTML/Hertz.html">Numbered lists should use the <code>&lt;ol&gt;&lt;/ol&gt;</code> and <code>&lt;li&gt;&lt;/li&gt;</code> tags.</a></li>
+                    <li><a href="Hertz.html">Numbered lists should use the <code>&lt;ol&gt;&lt;/ol&gt;</code> and <code>&lt;li&gt;&lt;/li&gt;</code> tags.</a></li>
                     <li>Nested lists work just like unordered lists (see above).</li>
                 </ol>
 
-                <h3><a href="https://ktane.timwi.de/HTML/The%20Octadecayotton.html">Text</a></h3>
-                <p><a href="https://ktane.timwi.de/HTML/Simon%27s%20Statement.html">Use paragraph tags (<code>&lt;p&gt;&lt;/p&gt;</code>) for text blocks. In addition, for text formatting, use:</a></p>
+                <h3><a href="The Octadecayotton.html">Text</a></h3>
+                <p><a href="Simon's Statement.html">Use paragraph tags (<code>&lt;p&gt;&lt;/p&gt;</code>) for text blocks. In addition, for text formatting, use:</a></p>
                 <ul>
                     <li>
-                        <strong><a href="https://ktane.timwi.de/HTML/Blank%20Slate.html">Bold</a></strong>: <code>&lt;strong&gt;&lt;/strong&gt;</code> (HTML) or <code>font-weight: bold;</code> (CSS).
+                        <strong><a href="Blank Slate.html">Bold</a></strong>: <code>&lt;strong&gt;&lt;/strong&gt;</code> (HTML) or <code>font-weight: bold;</code> (CSS).
                         <ul><li>Bold in table headers should be achieved through the use of the <code>&lt;th&gt;&lt;/th&gt;</code> tag.</li></ul>
                     </li>
-                    <li><em><a href="https://ktane.timwi.de/HTML/Not%20Green%20Arrows.html">Underline</a></em>: <code>&lt;em&gt;&lt;/em&gt;</code> (HTML) or <code>text-decoration: underline;</code> (CSS).</li>
-                    <li>Line<br />Break: <code>&lt;br /&gt;</code> (HTML)</li>
+                    <li><em><a href="Not Green Arrows.html">Underline</a></em>: <code>&lt;em&gt;&lt;/em&gt;</code> (HTML) or <code>text-decoration: underline;</code> (CSS).</li>
+                    <li>Line<br>Break: <code>&lt;br&gt;</code> (HTML)</li>
                 </ul>
-                <p><a href="https://ktane.timwi.de/HTML/Simon%27s%20Statement.html">For the most part, HTML versions of bolding and underlining is recommended. Note that italics are not used in vanilla manuals besides flavor text and references to appendices, and therefore is not included above. Also, here are some sample headings:</a></p>
-                <h3><a href="https://ktane.timwi.de/HTML/Blank%20Slate.html">Example Big Heading</a></h3>
-                <h4><a href="https://ktane.timwi.de/HTML/The%20Octadecayotton.html">Example Small Heading</a></h4>
+                <p><a href="Simon's Statement.html">For the most part, HTML versions of bolding and underlining is recommended. Note that italics are not used in vanilla manuals besides flavor text and references to appendices, and therefore is not included above. Also, here are some sample headings:</a></p>
+                <h3><a href="Blank Slate.html">Example Big Heading (H3)</a></h3>
+                <h4><a href="The Octadecayotton.html">Example Small Heading (H4)</a></h4>
             </div>
-            <div class="page-footer relative-footer">Page 1 of 3</div>
+            <div class="page-footer relative-footer">1 of 3</div>
         </div>
         <div class="page page-bg-02">
             <div class="page-header">
@@ -70,26 +79,26 @@
                 <span class="page-header-section-title">Module Name</span>
             </div>
             <div class="page-content">
-                <h3><a href="https://ktane.timwi.de/HTML/Simon%27s%20Statement.html">Example Tables</a></h3>
+                <h3><a href="Simon's Statement.html">Example Tables</a></h3>
                 <table>
                     <tr>
-                        <th><a href="https://ktane.timwi.de/HTML/The%20Octadecayotton.html">Part of table</a></th>
+                        <th><a href="The Octadecayotton.html">Part of table</a></th>
                         <th>How to make</th>
                     </tr>
                     <tr>
-                        <th><a href="https://ktane.timwi.de/HTML/Hertz.html">Rows and Columns</a></th>
+                        <th><a href="Hertz.html">Rows and Columns</a></th>
                         <td>
-                            <a href="https://ktane.timwi.de/HTML/Simon%27s%20Statement.html">Use <code>&lt;tr&gt;&lt;/tr&gt;</code> for rows.
+                            <a href="Simon's Statement.html">Use <code>&lt;tr&gt;&lt;/tr&gt;</code> for rows.
                             Use <code>&lt;th&gt;&lt;/th&gt;</code> or <code>&lt;td&gt;&lt;/td&gt;</code> for columns within rows (see below).</a>
                         </td>
                     </tr>
                     <tr>
-                        <th><a href="https://ktane.timwi.de/HTML/Simon%27s%20Statement.html">Headings (left column and top row, in most cases)</a></th>
-                        <td><a href="https://ktane.timwi.de/HTML/Simon%27s%20Statement.html">Use <code>&lt;th&gt;&lt;/th&gt;</code></a></td>
+                        <th><a href="Simon's Statement.html">Headings (left column and top row, in most cases)</a></th>
+                        <td><a href="Simon's Statement.html">Use <code>&lt;th&gt;&lt;/th&gt;</code></a></td>
                     </tr>
                     <tr>
-                        <th><a href="https://ktane.timwi.de/HTML/The%20Octadecayotton.html">Cells</a></th>
-                        <td><a href="https://ktane.timwi.de/HTML/Simon%27s%20Statement.html">Use <code>&lt;td&gt;&lt;/td&gt;</code></a></td>
+                        <th><a href="The Octadecayotton.html">Cells</a></th>
+                        <td><a href="Simon's Statement.html">Use <code>&lt;td&gt;&lt;/td&gt;</code></a></td>
                     </tr>
                     <tr>
                         <th rowspan="2">Merged Cells</th>
@@ -102,26 +111,26 @@
                         <td colspan="2">Note that merged cells created in other rows are skipped in affected rows (see HTML for above row).</td>
                     </tr>
                 </table>
-                <p><a href="https://ktane.timwi.de/HTML/Not%20Green%20Arrows.html">If the table contents are not wide enough, tables are centered by default due to the <code>table</code> rule of the first <code>&lt;style&gt;</code> block (see above code).</a></p>
-                <table class="center">
+                <p><a href="Not Green Arrows.html">If the table contents are not wide enough, tables are centered by default due to the <code>table</code> rule of the first <code>&lt;style&gt;</code> block (see above code).</a></p>
+                <table>
                     <tr>
-                        <th><a href="https://ktane.timwi.de/HTML/The%20Octadecayotton.html">Cell 1</a></th>
+                        <th><a href="The Octadecayotton.html">Cell 1</a></th>
                         <td>Cell 2</td>
                     </tr>
                     <tr>
-                        <th><a href="https://ktane.timwi.de/HTML/Simon%27s%20Statement.html">Cell 3</a></th>
-                        <td><a href="https://ktane.timwi.de/HTML/Simon%27s%20Statement.html">Cell 4</a></td>
+                        <th><a href="Simon's Statement.html">Cell 3</a></th>
+                        <td><a href="Simon's Statement.html">Cell 4</a></td>
                     </tr>
                 </table>
 
                 <h3>Images</h3>
                 <p>Use the <code>&lt;img src="_" /&gt;</code> tag for images. Make sure to put your images into the <code class="notcode">/img/[Module Name]/</code> folder. Adjust the width with CSS, using <code>width: _%;</code> (recommended) or <code>width: _px;</code>. Example:</p>
-                <a href="https://ktane.timwi.de/HTML/Blank%20Slate.html"><img style='width: 100%' src="img/Component/thing.png" /></a>
+                <a href="Blank Slate.html"><img class="example" src="img/Component/ktane-logo.png"></a>
 
                 <h3>Making the PDF</h3>
-                <p><a href="https://ktane.timwi.de/HTML/Not%20Green%20Arrows.html">To make a PDF version of your manual, open the HTML file in Google Chrome and open the "Print" dialog (Usually <kbd>CTRL</kbd>+<kbd>P</kbd>) and choose "Save as PDF" as the destination.</a></p>
+                <p><a href="Not Green Arrows.html">To make a PDF version of your manual, open the HTML file in Google Chrome and open the “Print” dialog (Usually <kbd>CTRL</kbd>+<kbd>P</kbd>) and choose “Save as PDF” as the destination.</a></p>
             </div>
-            <div class="page-footer relative-footer">Page 2 of 3</div>
+            <div class="page-footer relative-footer">2 of 3</div>
         </div>
         <div class="page page-bg-03">
             <div class="page-header">
@@ -132,16 +141,16 @@
                 <h2>Appendix M: Additional Notes</h2>
                 <p>Here other things to keep in mind when making a manual page:</p>
                 <ul>
-                    <li><a href="https://ktane.timwi.de/HTML/The%20Octadecayotton.html">There are comments <code>/* ... */</code> in the CSS code in the <code>&lt;style&gt;</code> blocks containing instructions. Follow those instructions before finishing your manual.</a></li>
+                    <li><a href="The Octadecayotton.html">There are comments <code>/* ... */</code> in the CSS code in the <code>&lt;style&gt;</code> blocks containing instructions. Follow those instructions before finishing your manual.</a></li>
                     <li>Normal and Needy module manual pages are formatted similarly. Widget manual pages are appendices and are formatted as such.</li>
-                    <li><a href="https://ktane.timwi.de/HTML/Not%20Green%20Arrows.html">Each manual or appendix page should have a <code>&lt;div class="page-footer...</code> at the bottom of the page, updated accordingly.</a></li>
-                    <li>Don't be afraid to ask for help if needed!</li>
+                    <li><a href="Not Green Arrows.html">Each manual or appendix page should have a <code>&lt;div class="page-footer...</code> at the bottom of the page, updated accordingly.</a></li>
+                    <li>Don’t be afraid to ask for help if needed!</li>
                     <li>
                         A few things to reiterate:
                         <ul>
-                            <li><a href="https://ktane.timwi.de/HTML/Blank%20Slate.html">Make sure to never forget closing tags (the ones with a <code>/</code> in them).</a></li>
-                            <li><a href="https://ktane.timwi.de/HTML/Blank%20Slate.html">For the most part, HTML versions of bolding and underlining is recommended.</a></li>
-                            <li><a href="https://ktane.timwi.de/HTML/Blank%20Slate.html">Italics are not used in vanilla manuals besides flavor text and references to appendices, and therefore is not included above.</a></li>
+                            <li><a href="Blank Slate.html">Make sure to never forget closing tags (the ones with a <code>/</code> in them).</a></li>
+                            <li><a href="Blank Slate.html">For the most part, HTML versions of bolding and underlining is recommended.</a></li>
+                            <li><a href="Blank Slate.html">Italics are not used in vanilla manuals besides flavor text and references to appendices, and therefore is not included above. However, their tags are <code>&lt;i&gt;&lt;/i&gt;</code> </a></li>
                         </ul>
                     </li>
                 </ul>
@@ -152,7 +161,7 @@
                 <br>
                 <p>TIMES</p>
             </div>
-            <div class="page-footer relative-footer">Page 3 of 3?</div>
+            <div class="page-footer relative-footer">3 of 3?</div>
         </div>
         <div class="page page-bg-04">
             <div class="page-header">
@@ -162,9 +171,9 @@
             <div class="page-content">
                 <img src="img/Component/Module Name.svg" class="diagram">
                 <h2>On the Subject of Module Name</h2>
-                <p class="flavour-text">A HTML NIGHTMARE!</p>
+                <p class="flavour-text">Your flavour text can't go here.</p>
 
-                <p><i>Use Appendix BLANK in <a href="https://ktane.timwi.de/HTML/Blind%20Alley.html">Blind Alley</a> for blank module identification</i></p>
+                <p><i>Use Appendix BLANK in <a href="Blind Alley.html">Blind Alley</a> for blank module identification</i></p>
                 <p>This module will initially appear blank, but it actually should display a part of html code if you click it.
                 Maybe multiple times? Hopefully that should work, just make sure to keep track. It will ding to indicate a press. When it displays this html code, use the template manual
                 to find the html code on this manual and click it. The number says which one of the same html code should be clicked, so p1
@@ -313,7 +322,7 @@
                 </table>
             
                 <br>
-                <p><i><a href="https://ktane.timwi.de/HTML/Blank%20Slate.html">Good luck!</a></i></p>
+                <p><i><a href="Blank Slate.html">Good luck!</a></i></p>
             </div>
             <div class="page-footer relative-footer">Page 7 of 7</div>
        </div>
