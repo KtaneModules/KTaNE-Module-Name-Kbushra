@@ -127,7 +127,7 @@ public class SimpleModuleScript : MonoBehaviour {
 	bool indFound = false;
 	bool portFound = false;
 	bool[] colorbools = new bool[4];
-	int requiredCol;
+	int requiredCol = -1;
 
 	//Not green arrows vars
 	char[] letters = new char[3];
@@ -628,28 +628,29 @@ public class SimpleModuleScript : MonoBehaviour {
 			string curstring = curNum.ToString ();
 			colorbools [randCol] = true;
 			colorbools [(randCol + 1) % 4] = true;
+			bool isTableA = true;
 
-			if(randCount % 8 + 1 == 3 && (colorbools[info.GetBatteryHolderCount() % 4] ^ colorbools[info.GetPortPlateCount() % 4] == true))
+			if(randCount % 8 + 1 == 3 && colorbools[info.GetBatteryHolderCount() % 4] ^ colorbools[info.GetPortPlateCount() % 4])
 			{
 				requiredCol = simontableA [int.Parse (curstring.ToCharArray () [0].ToString ()), int.Parse (curstring.ToCharArray () [1].ToString ())];
 			}
-			else if(randCount % 8 + 1 == 4 && (!(colorbools[info.GetBatteryHolderCount() % 4] && colorbools[info.GetPortPlateCount() % 4]) == true))
+			else if(randCount % 8 + 1 == 4 && !(colorbools[info.GetBatteryHolderCount() % 4] && colorbools[info.GetPortPlateCount() % 4]))
 			{
 				requiredCol = simontableA [int.Parse (curstring.ToCharArray () [0].ToString ()), int.Parse (curstring.ToCharArray () [1].ToString ())];
 			}
-			else if(randCount % 8 + 1 == 5 && (!(colorbools[info.GetBatteryHolderCount() % 4] || colorbools[info.GetPortPlateCount() % 4]) == true))
+			else if(randCount % 8 + 1 == 5 && !(colorbools[info.GetBatteryHolderCount() % 4] || colorbools[info.GetPortPlateCount() % 4]))
 			{
 				requiredCol = simontableA [int.Parse (curstring.ToCharArray () [0].ToString ()), int.Parse (curstring.ToCharArray () [1].ToString ())];
 			}
-			else if(randCount % 8 + 1 == 6 && (!(colorbools[info.GetBatteryHolderCount() % 4] ^ colorbools[info.GetPortPlateCount() % 4]) == true))
+			else if(randCount % 8 + 1 == 6 && colorbools[info.GetBatteryHolderCount() % 4] == colorbools[info.GetPortPlateCount() % 4])
 			{
 				requiredCol = simontableA [int.Parse (curstring.ToCharArray () [0].ToString ()), int.Parse (curstring.ToCharArray () [1].ToString ())];
 			}
-			else if(randCount % 8 + 1 == 7 && (!((colorbools[info.GetBatteryHolderCount() % 4] == false) && (colorbools[info.GetPortPlateCount() % 4] == true)) == true))
+			else if(randCount % 8 + 1 == 7 && !(colorbools[info.GetBatteryHolderCount() % 4] && !colorbools[info.GetPortPlateCount() % 4]))
 			{
 				requiredCol = simontableA [int.Parse (curstring.ToCharArray () [0].ToString ()), int.Parse (curstring.ToCharArray () [1].ToString ())];
 			}
-			else if(randCount % 8 + 1 == 8 && (!((colorbools[info.GetBatteryHolderCount() % 4] == true) && (colorbools[info.GetPortPlateCount() % 4] == false)) == true))
+			else if(randCount % 8 + 1 == 8 && !(!colorbools[info.GetBatteryHolderCount() % 4] && colorbools[info.GetPortPlateCount() % 4]))
 			{
 				requiredCol = simontableA [int.Parse (curstring.ToCharArray () [0].ToString ()), int.Parse (curstring.ToCharArray () [1].ToString ())];
 			}
@@ -664,13 +665,16 @@ public class SimpleModuleScript : MonoBehaviour {
 			else
 			{
 				requiredCol = simontableB [int.Parse (curstring.ToCharArray () [0].ToString ()), int.Parse (curstring.ToCharArray () [1].ToString ())];
-				Debug.LogFormat ("[Module Name #{0}] Module chosen is Simon's statement and the boolean evaluated false", ModuleId);
+				isTableA = false;
+				Debug.LogFormat ("[Module Name #{0}] Module chosen is Simon's statement and the boolean evaluated false due to operation {1} " +
+					"and the colours {2} and {3} being true, where {2} was the display colour", ModuleId, randCount % 8 + 1, randCol, (randCol + 1) % 4);
 			}
 
-			if(requiredCol == simontableA [int.Parse (curstring.ToCharArray () [0].ToString ()), int.Parse (curstring.ToCharArray () [1].ToString ())])
+			if(isTableA)
 			{
-				Debug.LogFormat ("[Module Name #{0}] Module chosen is Simon's statement and the boolean evaluated true", ModuleId);
-			}
+                Debug.LogFormat("[Module Name #{0}] Module chosen is Simon's statement and the boolean evaluated true due to operation {1} " +
+                    "and the colours {2} and {3} being true, where {2} was the display colour", ModuleId, randCount % 8 + 1, randCol, (randCol + 1) % 4);
+            }
 
 			if (requiredCol == 3) 
 			{
