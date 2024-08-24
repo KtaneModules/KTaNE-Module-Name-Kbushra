@@ -194,7 +194,8 @@ public class SimpleModuleScript : MonoBehaviour {
 			randCol = Rnd.Range (0, 4);
 			Material material = screenCol [randCol];
 			Screen.GetComponent<Renderer> ().material = material;
-			simonException = false;
+            colorbools = new bool[4] { false, false, false, false };
+            simonException = false;
 			if (screenCol [randCol] != screenCol [requiredCol]) 
 			{
 				Calculate ();
