@@ -201,7 +201,7 @@ public class SimpleModuleScript : MonoBehaviour {
 				Calculate ();
 			}
 		}
-		if (screenCol[randCol] == screenCol[requiredCol] && curNum != 0) 
+		if (pressCount == randCount + 1 && screenCol[randCol] == screenCol[requiredCol] && curNum != 0) 
 		{
 			if (input.ToString().ToCharArray().Length > output.ToString().ToCharArray().Length)
 			{
